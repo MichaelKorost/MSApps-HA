@@ -1,4 +1,8 @@
 const express = require("express");
-const {} = require("../controllers/photoController");
+const { getPhotos } = require("../controllers/photoController");
 
 const router = express.Router();
+
+router.get("/", getPhotos);
+
+module.exports = router;
