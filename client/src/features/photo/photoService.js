@@ -1,7 +1,6 @@
 import axios from "axios";
 
-// const API_URL = "http://localhost:4000/api/photo";
-const API_URL = "http://localhost:4000/api/photo";
+const API_URL = "https://ms-apps-ha-navy.vercel.app/api/photo";
 
 // get photos
 const getPhotos = async (category, page) => {
