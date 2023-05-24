@@ -32,8 +32,7 @@ const getPhotos = async (req, res) => {
     if (error.response && error.response.status === 400) {
       return res.status(400).json({ message: "Pixabay API error" });
     }
-    console.log(error);
-    res.status(500).json({ message: "Internal Server Error" });
+    throw new Error("Internal Server Error");
   }
 };
 
