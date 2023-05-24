@@ -1,10 +1,4 @@
-const axios = require("axios");
-
 const { mapPhotoObjects, fetchPhotos } = require("../utils/commonUtils");
-
-// const { PIXABAY_API_KEY } = process.env;
-
-// const BASE_URL = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&per_page=9`; // 9 is the number of photos per page
 
 // @desc    Get all photos
 // @route   GET /api/photo/:category
