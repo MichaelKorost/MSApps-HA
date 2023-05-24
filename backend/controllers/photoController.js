@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+const { mapPhotoObjects } = require("../utils/commonUtils");
+
 const { PIXABAY_API_KEY } = process.env;
 
 const BASE_URL = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&per_page=9`; // 9 is the number of photos per page
@@ -18,17 +20,7 @@ const getPhotos = async (req, res) => {
     const totalPages = Math.ceil(response.data.totalHits / 9); // 9 is the number of photos per page
 
     // map photoObjects to a new array of objects with only the properties we need
-    const photos = photoObjects.map((photo) => ({
-      id: photo.id,
-      imgUrl: photo.webformatURL,
-      views: photo.views,
-      downloads: photo.downloads,
-      collection: photo.collections,
-      likes: photo.likes,
-      tags: photo.tags,
-      user: photo.user,
-      userImgUrl: photo.userImageURL,
-    }));
+    const photos = mapPhotoObjects(photoObjects);
 
     res.status(200).json({ totalPages, currentPage: page, photos });
   } catch (error) {
@@ -54,17 +46,7 @@ const sortPhotosById = async (req, res) => {
     const totalPages = Math.ceil(response.data.totalHits / 9); // 9 is the number of photos per page
 
     // map photoObjects to a new array of objects with only the properties we need
-    const photos = photoObjects.map((photo) => ({
-      id: photo.id,
-      imgUrl: photo.webformatURL,
-      views: photo.views,
-      downloads: photo.downloads,
-      collection: photo.collections,
-      likes: photo.likes,
-      tags: photo.tags,
-      user: photo.user,
-      userImgUrl: photo.userImageURL,
-    }));
+    const photos = mapPhotoObjects(photoObjects);
 
     // if order is none, return the photos as is
     if (order === "none") {
