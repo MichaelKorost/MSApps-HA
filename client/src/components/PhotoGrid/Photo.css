@@ -1,0 +1,117 @@
+.photo-wrapper {
+  position: relative;
+}
+
+.photo__id {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  background-color: white;
+}
+
+.photo {
+  object-fit: cover;
+  max-width: 250px;
+  width: 100%;
+  height: 250px;
+  margin: 1px;
+}
+
+.photo:hover {
+  cursor: pointer;
+  outline: 1px solid #000;
+}
+
+.modal-section {
+  position: fixed;
+}
+
+.backdrop {
+  background-color: #2f3542;
+  display: none;
+  z-index: 4;
+}
+.backdrop--active {
+  display: block;
+  background-color: #1a1a1a;
+  opacity: 0.8;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99;
+}
+
+.modal {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  background-color: white;
+  z-index: 999;
+  max-width: 600px;
+  width: 90%;
+  max-height: 600px;
+  height: 90%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.modal__close {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 20px;
+  width: fit-content;
+  margin: 0 0 0 auto;
+}
+
+.modal__info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.modal__user {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.modal__user img {
+  max-width: 140px;
+  max-height: 140px;
+  width: 50%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.modal__user p {
+  font-size: 20px;
+  line-height: 20px;
+  margin: 0;
+  font-weight: bold;
+  max-width: 160px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.modal__stats {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.modal__stats2 {
+  display: flex;
+  justify-content: center;
+  gap: 20%;
+}
