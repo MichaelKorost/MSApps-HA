@@ -9,7 +9,7 @@ home assignment for MSApps
 - Node.js
 - Express
 
-## Setup
+## Setup - not necessary to view project
 
 1. Clone repository
 ```
