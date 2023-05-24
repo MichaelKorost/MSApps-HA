@@ -36,7 +36,6 @@ export const getPhotosByOrder = createAsyncThunk(
   "photo/getPhotosByOrder",
   async ({ category, page, order }, thunkAPI) => {
     try {
-      console.log(order);
       return await photoService.getPhotosByOrder(category, page, order);
     } catch (error) {
       const message =
