@@ -8,12 +8,15 @@ import {
 } from "../../features/photo/photoSlice";
 import PhotoGrid from "../../components/PhotoGrid/PhotoGrid";
 import Loading from "../../components/Loading/Loading";
+import SelectDropdown from "../../components/SelectDropdown/SelectDropdown";
 
 function HomePage() {
   const [category, setCategory] = useState("sports");
   const [page, setPage] = useState(1); // page number
-  const [order, setOrder] = useState("none");
+  const [order, setOrder] = useState("none"); //asc, desc, none
+
   const dispatch = useDispatch();
+
   const { photos, totalPages, currentPage, isError, isLoading, message } =
     useSelector((state) => state.photo);
 
@@ -28,6 +31,7 @@ function HomePage() {
     }
 
     return () => {
+      // when component unmounts reset the state (message, isError, isLoading)
       dispatch(reset());
     };
   }, [isError, message, dispatch, category, page, order]);
@@ -41,29 +45,33 @@ function HomePage() {
   const handleOrderChange = (e) => {
     if (e.target.value === order) return;
     setOrder(e.target.value);
-    // dispatch(getPhotosByOrder({ category, page, order: e.target.value }));
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setPage((prevPage) => prevPage + 1);
-      //   setOrder("none");
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setPage((prevPage) => prevPage - 1);
-      //   setOrder("none")
     }
   };
 
-  useEffect(() => {
-    console.log(photos);
-    console.log(totalPages);
-    console.log(currentPage);
-    console.log(page);
-  }, [photos, totalPages, currentPage, page]);
+  const categoryOptions = [
+    { value: "sports", label: "Sports" },
+    { value: "fashion", label: "Fashion" },
+    { value: "science", label: "Science" },
+    { value: "animals", label: "Animals" },
+    { value: "places", label: "Places" },
+  ];
+
+  const orderOptions = [
+    { value: "none", label: "None" },
+    { value: "asc", label: "Ascending" },
+    { value: "desc", label: "Descending" },
+  ];
 
   return (
     <div className="home">
@@ -73,36 +81,26 @@ function HomePage() {
         <button className="home__btn" onClick={handlePrevPage}>
           Prev
         </button>
-        <select
-          className="home__select"
-          name="categories"
+        <SelectDropdown
+          options={categoryOptions}
           value={category}
           onChange={handleCategoryChange}
-        >
-          <option value="sports">Sports</option>
-          <option value="fashion">Fashion</option>
-          <option value="science">Science</option>
-          <option value="animals">Animals</option>
-          <option value="places">Places</option>
-        </select>
+        />
         <button className="home__btn" onClick={handleNextPage}>
           Next
         </button>
       </section>
 
       <section className="home__order-action">
-        <p>Order id by:</p>
-        <select
-          className="home__select"
-          onChange={handleOrderChange}
+        <p>Order photo ids by:</p>
+        <SelectDropdown
+          options={orderOptions}
           value={order}
-        >
-          <option value="none">None</option>
-          <option value="asc">Ascending</option>
-          <option value="desc">Descending</option>
-        </select>
+          onChange={handleOrderChange}
+        />
       </section>
 
+      {/* when loading is finished show the photo grid */}
       <section>{!isLoading && <PhotoGrid photos={photos} />}</section>
     </div>
   );

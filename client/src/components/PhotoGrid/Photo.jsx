@@ -1,9 +1,11 @@
 import "./Photo.css";
 import { useState } from "react";
 
+// when a photo is clicked, a modal will appear with more info about the photo
+
 function Photo({ photo }) {
-  const [isClicked, setIsClicked] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [isClicked, setIsClicked] = useState(false); //tracks if a photo is clicked
+  const [selectedPhoto, setSelectedPhoto] = useState(null); // tracks the selected photo
 
   const handleClick = (photo) => {
     setSelectedPhoto(photo);

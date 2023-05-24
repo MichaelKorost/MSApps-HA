@@ -12,12 +12,11 @@ const initialState = {
 };
 
 // get photos
-
+// receives an object of category and page from HomePage.jsx and passes them to photoService.js
 export const getPhotos = createAsyncThunk(
   "photo/getPhotos",
   async ({ category, page }, thunkAPI) => {
     try {
-      console.log(category);
       return await photoService.getPhotos(category, page);
     } catch (error) {
       const message =
@@ -31,6 +30,8 @@ export const getPhotos = createAsyncThunk(
   }
 );
 
+// get photos by order
+// receives an object of category, page, and order from HomePage.jsx and passes them to photoService.js
 export const getPhotosByOrder = createAsyncThunk(
   "photo/getPhotosByOrder",
   async ({ category, page, order }, thunkAPI) => {
@@ -53,7 +54,6 @@ export const photoSlice = createSlice({
   name: "photo",
   initialState,
   reducers: {
-    // reset might be not complete
     reset: (state) => {
       state.isError = false;
       state.isSuccess = false;

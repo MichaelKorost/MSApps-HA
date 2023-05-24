@@ -27,16 +27,6 @@
   color: #fff;
 }
 
-.home__select {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  color: #333;
-  cursor: pointer;
-  transition: all 0.1s ease-in-out;
-}
-
 .home__order-action {
   display: flex;
   justify-content: center;
