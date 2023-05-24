@@ -1,10 +1,10 @@
 const axios = require("axios");
 
-const { mapPhotoObjects } = require("../utils/commonUtils");
+const { mapPhotoObjects, fetchPhotos } = require("../utils/commonUtils");
 
-const { PIXABAY_API_KEY } = process.env;
+// const { PIXABAY_API_KEY } = process.env;
 
-const BASE_URL = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&per_page=9`; // 9 is the number of photos per page
+// const BASE_URL = `https://pixabay.com/api/?key=${PIXABAY_API_KEY}&per_page=9`; // 9 is the number of photos per page
 
 // @desc    Get all photos
 // @route   GET /api/photo/:category
@@ -15,9 +15,9 @@ const getPhotos = async (req, res) => {
   try {
     const { category } = req.params;
     const page = parseInt(req.query.page) || 1; //default page is 1 or the page number sent from the client
-    const response = await axios.get(`${BASE_URL}&page=${page}&q=${category}`);
-    const photoObjects = response.data.hits;
-    const totalPages = Math.ceil(response.data.totalHits / 9); // 9 is the number of photos per page
+
+    // fetch photos from the Pixabay API, receives page and category and returns photoObjects and totalPages
+    const { photoObjects, totalPages } = await fetchPhotos(page, category);
 
     // map photoObjects to a new array of objects with only the properties we need
     const photos = mapPhotoObjects(photoObjects);
@@ -41,9 +41,9 @@ const sortPhotosById = async (req, res) => {
     const { order } = req.params;
     const { category } = req.query;
     const page = parseInt(req.query.page) || 1; //default page is 1 or the page number sent from the client
-    const response = await axios.get(`${BASE_URL}&page=${page}&q=${category}`);
-    const photoObjects = response.data.hits;
-    const totalPages = Math.ceil(response.data.totalHits / 9); // 9 is the number of photos per page
+
+    // fetch photos from the Pixabay API, receives page and category and returns photoObjects and totalPages
+    const { photoObjects, totalPages } = await fetchPhotos(page, category);
 
     // map photoObjects to a new array of objects with only the properties we need
     const photos = mapPhotoObjects(photoObjects);

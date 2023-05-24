@@ -7,7 +7,7 @@ const initialState = {
   currentPage: 0,
   isError: false,
   isSuccess: false,
-  isLoading: false,
+  isLoading: true,
   message: "",
 };
 
@@ -56,7 +56,7 @@ export const photoSlice = createSlice({
     reset: (state) => {
       state.isError = false;
       state.isSuccess = false;
-      state.isLoading = false;
+      state.isLoading = true;
       state.message = "";
     },
   },
